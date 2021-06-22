@@ -1,0 +1,5 @@
+virtual/
+venv/
+env/
+*.pyc
+*.sh
