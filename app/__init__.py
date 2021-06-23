@@ -1,9 +1,17 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from config import config_options
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from flask_uploads import UploadSet,configure_uploads,IMAGES
 
 bootstrap = Bootstrap()
+db = SQLAlchemy()
+
+login_manager = LoginManager()
+login_manager.session_protection = 'strong' #provides different security levels & will monitor the changes in a user's request header & log the user out
+login_manager.login_view = 'auth.login
+
 photos = UploadSet('photos',IMAGES)
 
 def create_app(config_name):
