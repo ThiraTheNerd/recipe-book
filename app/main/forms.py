@@ -2,6 +2,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,TextAreaField,SubmitField,IntegerField,FileField
 from wtforms.validators import Required
 
+
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about yourself', validators = [Required]
+    submit = SubmitField('Submit')
+                        
+                        
 class RecipeForm(FlaskForm):
 
     name = StringField('Recipe name',validators=[Required()])
