@@ -10,7 +10,7 @@ db = SQLAlchemy()
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong' #provides different security levels & will monitor the changes in a user's request header & log the user out
-login_manager.login_view = 'auth.login
+login_manager.login_view = 'auth.login'
 
 photos = UploadSet('photos',IMAGES)
 
