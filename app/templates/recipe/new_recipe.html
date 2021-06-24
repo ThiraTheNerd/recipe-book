@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="margin: 30px;">Add New Recipe</div>
+    <div class="card-body" id="recipe-form">
+        {{ wtf.quick_form(form) }}
+        {{simplemde.load}}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

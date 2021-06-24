@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="{{url_for('static', filename = 'photos/' + recipe.image)}}" class="img-responsive">
+      <div class="social_media_icons">
+        <a><i class="fab fa-facebook-f"></i></a>
+        <a><i class="fab fa-twitter"></i></a>
+        <a><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      {{format_recipe|safe}}
+    </div>
+  </div>
+</div>
+{%endblock%}

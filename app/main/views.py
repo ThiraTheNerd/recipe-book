@@ -1,13 +1,15 @@
-from flask import render_template,request,redirect,url_for,abort
+
+from flask import render_template,request,redirect,url_for,flash,abort
 from . import main
-from ..models import User 
-from flask_login import login_required,current_user
-from .forms import UpdateProfile
-from .. import db,photos
+from ..models import Recipe, User
+from .forms import RecipeForm, UpdateProfile
+from .. import photos,db
+import markdown2
 
 # Views
 @main.route('/')
 def index():
+  
   title = "Homepage"
   return render_template('index.html', title=title)
 
@@ -56,4 +58,35 @@ def update_pic(uname):
 
     return redirect(url_for('main.profile', uname  = uname))
 
+
+@main.route('/recipies')
+def all_recipes():
+  recipes = Recipe.get_recipes()
+  return render_template('recipe/all_recipes.html',recipes=recipes )
+
+@main.route('/recipes/new',methods = ['GET', 'POST'])
+def new_recipe():
+  form = RecipeForm()
+  if form.validate_on_submit():
+    filename= photos.save(form.image.data)
+
+    new_recipe = Recipe(name=form.name.data, num_of_servings =form.serving.data,
+    image = filename,ingredients = form.ingredients.data, 
+    description = form.description.data,country = form.country.data)
+
+    new_recipe.save()
+
+    flash('Your recipe has been created successfully')
+    return redirect(url_for('main.all_recipes'))
+  return render_template('recipe/new_recipe.html', title = "New Pitch", form = form)
+
+@main.route('/recipes/<int:id>', methods=['GET'])
+def view_recipe(id):
+  recipe = Recipe.query.get(id)
+  print(recipe)
+  if recipe is None:
+    abort(404)
+  format_recipe = markdown2.markdown(recipe.ingredients, extras=["code-friendly", "fenced-code-blocks"])
+
+  return render_template('recipe/recipe.html', format_recipe=format_recipe, recipe=recipe)
 
