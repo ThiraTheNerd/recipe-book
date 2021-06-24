@@ -1,10 +1,10 @@
-
 from flask import render_template,request,redirect,url_for,flash,abort
 from . import main
 from ..models import Recipe, User
 from .forms import RecipeForm, UpdateProfile
 from .. import photos,db
 import markdown2
+from flask_login import login_required
 
 # Views
 @main.route('/')

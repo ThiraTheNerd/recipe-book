@@ -8,6 +8,11 @@
       <h5 class="card-title">Serving : {{recipe.num_of_servings}}</h5>
       <a href="{{url_for('main.view_recipe', id = recipe.id)}}" >View</a>
     </div>
+    <ul class="cta" style="font-size: 20px;">
+      <li class="fa fa-facebook"><a href="http://www.facebook.com/sharer.php?u=https://www.facebook.com/" target="_blank">Share on Facebook</a></li>
+      <li class="fa fa-twitter"><a href="http://twitter.com/home?status=YOUR_TWEET" target="_blank">Share on Twitter</a></li>
+      <li class="fa fa-instagram"><a href="http://instagram.com/?u=http://instagram.com">Share on Instagram</a></li>
+  </ul>
   </div>
   {% endfor %}
 
