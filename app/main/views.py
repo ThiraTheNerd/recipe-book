@@ -90,3 +90,11 @@ def view_recipe(id):
 
   return render_template('recipe/recipe.html', format_recipe=format_recipe, recipe=recipe)
 
+def single_recipe(request,recipe_id):  
+    recipe = Recipe.objects.get(id=recipe_id)   
+    is_favourite = False   
+    if recipe.favourite.filter(id=request.user.id).exists():   
+      is_favourite = True
+      params = { 'recipe':recipe, 'is_favourite':is_favourite}
+      
+    return render_template(request,'macros.html',params)

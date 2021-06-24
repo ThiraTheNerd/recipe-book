@@ -2,6 +2,15 @@
 
   {% for recipe in recipe_list %}
   <div class="card" style="width: 18rem;" id="recipe-card">
+    {% if is_favourite%}
+    <a href="{% url 'favourite_recipe' id=recipe.id %}">
+      <i class="fas fa-bookmark fa-lg"></i>
+    </a>
+    {%else%}
+    <a href="{% url 'favourite_recipe' recipe.id %}">
+      <i class="far fa-bookmark fa-lg"></i>
+    </a>
+    {% endif %}
     <img src="{{url_for('static', filename = 'photos/' + recipe.image)}}" class="card-img-top" alt="...">
     <div class="card-header">{{recipe.name}}</div>
     <div class="card-body" id="recipe_card_body">
@@ -12,7 +21,7 @@
       <li class="fa fa-facebook"><a href="http://www.facebook.com/sharer.php?u=https://www.facebook.com/" target="_blank">Share on Facebook</a></li>
       <li class="fa fa-twitter"><a href="http://twitter.com/home?status=YOUR_TWEET" target="_blank">Share on Twitter</a></li>
       <li class="fa fa-instagram"><a href="http://instagram.com/?u=http://instagram.com">Share on Instagram</a></li>
-  </ul>
+    </ul>
   </div>
   {% endfor %}
 
