@@ -1,0 +1,16 @@
+{% macro displayRecipeList(recipe_list) %}
+
+  {% for recipe in recipe_list %}
+  <div class="card" style="width: 18rem;" id="recipe-card">
+    <img src="{{url_for('static', filename = 'photos/' + recipe.image)}}" class="card-img-top" alt="...">
+    <div class="card-header">{{recipe.name}}</div>
+    <div class="card-body" id="recipe_card_body">
+      <h5 class="card-title">Serving : {{recipe.num_of_servings}}</h5>
+      <a href="{{url_for('main.view_recipe', id = recipe.id)}}" >View</a>
+    </div>
+  </div>
+  {% endfor %}
+
+
+
+{% endmacro %}
